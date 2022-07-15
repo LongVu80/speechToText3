@@ -2,7 +2,7 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
   let speechRecognition = new SpeechRecognition();
   let final_transcript = "";
 
-  speechRecognition.continuous = true;
+  speechRecognition.continuous = false;
   speechRecognition.interimResults = true;
 
   speechRecognition.onstart = () => {
@@ -18,7 +18,7 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 
 
   speechRecognition.onresult = (event) => {
-    let interim_transcript = "";
+    // let interim_transcript = "";
 
     for (let i = event.resultIndex; i < event.results.length; ++i) {
       if (event.results[i].isFinal) {
@@ -50,3 +50,7 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
     location.reload()
   };
 
+  window.setInterval(function() {
+  var final = document.querySelector("#final");
+  final.scrollTop = final.scrollHeight;
+  }, 1000)
