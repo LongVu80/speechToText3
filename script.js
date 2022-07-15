@@ -24,11 +24,11 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
       if (event.results[i].isFinal) {
         final_transcript += event.results[i][0].transcript;
       } 
-      else {
-        interim_transcript += event.results[i][0].transcript;
-      }
+      // else {
+      //   interim_transcript += event.results[i][0].transcript;
+      // }
     }
-    document.querySelector("#final").innerHTML = final_transcript + interim_transcript;
+    document.querySelector("#final").innerHTML = final_transcript;
     // document.querySelector("#interim").innerHTML = interim_transcript;
   };
 
