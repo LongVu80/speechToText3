@@ -28,8 +28,8 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
         interim_transcript += event.results[i][0].transcript;
       }
     }
-    document.querySelector("#final").innerHTML = final_transcript;
-    document.querySelector("#interim").innerHTML = interim_transcript;
+    document.querySelector("#final").innerHTML = final_transcript + interim_transcript;
+    // document.querySelector("#interim").innerHTML = interim_transcript;
   };
 
   document.querySelector("#start").onclick = () => {
