@@ -1,5 +1,5 @@
-if ("webkitSpeechRecognition" in window) {
-  let speechRecognition = new webkitSpeechRecognition();
+let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let speechRecognition = new SpeechRecognition();
   let final_transcript = "";
 
   speechRecognition.continuous = true;
@@ -49,7 +49,4 @@ if ("webkitSpeechRecognition" in window) {
   document.querySelector("#clear").onclick = () => {
     location.reload()
   };
-} else {
-  console.log("Speech Recognition Not Available");
-}
 
