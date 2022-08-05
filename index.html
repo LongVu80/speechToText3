@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css">
     <title>Speech To Text</title>
   </head>
   <body class="container pt-5 bg-dark">
@@ -12,14 +13,17 @@
     <!-- <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
       <span id="final" class="text-light"></span>
       <span id="interim" class="text-light"></span>
+      
       </div> -->
-      <textarea id="final" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px;"></textarea>
+      <div id="texting" class="text-light" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;"> 
+        <span class="scroll-start-at-top" style="flex: 1 1 0%;"></span><div id="final"></div></div>
+      <!-- <textarea id="final" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px;"></textarea> -->
     
     <div class="mt-4">
-      <button class="btn btn-success" id="start">Start</button>
-      <button class="btn btn-danger" id="clear">Stop & Clear</button>
+      <!-- <button class="btn btn-success" id="start">Start</button> -->
+      <button class="btn btn-danger" id="clear">Stop & Clear</button> 
       <p id="status" class="lead mt-3 text-light" style="display: none">Listenting ...</p>
     </div>
   </body>
-  <script src="./script.js"></script>
+  <script src="./script2.js"></script>
 </html>

@@ -2,7 +2,7 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
   let speechRecognition = new SpeechRecognition();
   let final_transcript = "";
 
-  speechRecognition.continuous = false;
+  // speechRecognition.continuous = false;
   speechRecognition.interimResults = true;
 
   speechRecognition.onstart = () => {
