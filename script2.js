@@ -45,18 +45,18 @@ recognition.addEventListener("result", (e) => {
   }
 });
 
-// document.querySelector("#start").onclick = () => {
-//   recognition.start();
-// // this.openFullscreen()
-// document.querySelector("#status").innerHTML =`Voice Recognition is on`
-// };
+document.querySelector("#start").onclick = () => {
+  recognition.start();
+// this.openFullscreen()
+document.querySelector("#status").innerHTML =`Voice Recognition is on`
+};
 
 recognition.addEventListener("end", () => {
   recognition.start();
 
 });
 
-recognition.start();
+// recognition.start();
 
 document.querySelector("#clear").onclick = () => {
   location.reload()
