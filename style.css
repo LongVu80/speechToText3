@@ -17,3 +17,11 @@ p {
 p.reply {
     text-align: right;
 }
+
+#start {
+    width: 7rem;
+}
+
+.fa-keyboard {
+    cursor: pointer;
+}

@@ -13,25 +13,26 @@ recognition.addEventListener("result", (e) => {
   const text = Array.from(e.results)
     .map((result) => result[0])
     .map((result) => result.transcript)
-    .join("");
+    .join("")
 
   p.innerText = text;
+  
   if (e.results[0].isFinal) {
-    if (text.includes("how are you")) {
-      p = document.createElement("p");
-      p.classList.add("reply");
-      p.innerText = "I am fine";
-      texts.appendChild(p);
-    }
-    if (
-      text.includes("what's your name") ||
-      text.includes("what is your name")
-    ) {
-      p = document.createElement("p");
-      p.classList.add("reply");
-      p.innerText = "My Name is Long Vu";
-      texts.appendChild(p);
-    }
+    // if (text.includes("how are you")) {
+    //   p = document.createElement("p");
+    //   p.classList.add("reply");
+    //   p.innerText = "I am fine";
+    //   texts.appendChild(p);
+    // }
+    // if (
+    //   text.includes("what's your name") ||
+    //   text.includes("what is your name")
+    // ) {
+    //   p = document.createElement("p");
+    //   p.classList.add("reply");
+    //   p.innerText = "My Name is Long Vu";
+    //   texts.appendChild(p);
+    // }
     // if (text.includes("open my YouTube")) {
     //   p = document.createElement("p");
     //   p.classList.add("replay");
@@ -44,8 +45,15 @@ recognition.addEventListener("result", (e) => {
   }
 });
 
+// document.querySelector("#start").onclick = () => {
+//   recognition.start();
+// // this.openFullscreen()
+// document.querySelector("#status").innerHTML =`Voice Recognition is on`
+// };
+
 recognition.addEventListener("end", () => {
   recognition.start();
+
 });
 
 recognition.start();
@@ -53,3 +61,12 @@ recognition.start();
 document.querySelector("#clear").onclick = () => {
   location.reload()
 };
+
+document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
+  textarea = document.querySelector('#t-final');
+  if(textarea.style.display === "none"){
+    textarea.style.display = "block";
+  } else {
+    textarea.style.display = "none"
+  }
+})

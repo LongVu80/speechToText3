@@ -53,4 +53,4 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
   window.setInterval(function() {
   var final = document.querySelector("#final");
   final.scrollTop = final.scrollHeight;
-  }, 1000)
+  }, 50)
