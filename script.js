@@ -19,16 +19,21 @@ let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogniti
 
   speechRecognition.onresult = (event) => {
     // let interim_transcript = "";
-
-    for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final_transcript += event.results[i][0].transcript;
-      } 
+    const text = Array.from(event.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join("")
+    document.querySelector("#final").innerText = text;
+    // for (let i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[0].isFinal) {
+    //     text += event.results[i][0].transcript;
+    //   } 
       // else {
       //   interim_transcript += event.results[i][0].transcript;
       // }
-    }
-    document.querySelector("#final").innerHTML = final_transcript;
+    // }
+    document.querySelector("#final").innerText = text;
+      }
     // document.querySelector("#interim").innerHTML = interim_transcript;
   };
 
