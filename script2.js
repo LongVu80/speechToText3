@@ -6,11 +6,10 @@ window.SpeechRecognition =
 const recognition = new SpeechRecognition();
 recognition.interimResults = true;
 recognition.continuous = true;
-
 let p = document.createElement("p");
 
 recognition.addEventListener("result", (e) => {
-  // texts.appendChild(p);
+  texts.appendChild(p);
  
 
   
@@ -19,7 +18,7 @@ recognition.addEventListener("result", (e) => {
     .map((result) => result.transcript)
     .join("")
 
-  
+  texts.innerText = text;
   if (e.results[0].isFinal) {
     // if (text.includes("how are you")) {
     //   p = document.createElement("p");
