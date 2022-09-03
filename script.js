@@ -58,9 +58,9 @@ document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
     recognition.lang = option;   
   })
 
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  }
+  // function googleTranslateElementInit() {
+  //   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  // }
 
   // document.querySelector('#final').addEventListener('input', function(e){
   //   document.querySelector('#textbox').innerHTML = `<strong class="text-light notranslate">Translation:</strong> <div class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px;">${e.target.value}</div>`
