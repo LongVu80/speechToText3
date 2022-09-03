@@ -1,61 +1,67 @@
-let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  let speechRecognition = new SpeechRecognition();
-  let final_transcript = "";
+const texts = document.querySelector("#final");
+const textbox = document.querySelector('#textbox');
 
-  // speechRecognition.continuous = false;
-  speechRecognition.interimResults = true;
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  speechRecognition.onstart = () => {
-    document.querySelector("#status").style.display = "block";
-  };
-  // speechRecognition.onerror = () => {
-  //   document.querySelector("#status").innerHTML = `Speech Recognition Error`;
-    
-  // };
-  speechRecognition.onend = () => {
-    speechRecognition.start()
-  };
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
 
+let p = document.createElement("p");
 
-  speechRecognition.onresult = (event) => {
-    // let interim_transcript = "";
-    const text = Array.from(event.results)
+recognition.addEventListener("result", (e) => {
+  texts.appendChild(p);
+  const text = Array.from(e.results)
     .map((result) => result[0])
     .map((result) => result.transcript)
     .join("")
-    document.querySelector("#final").innerText = text;
-    // for (let i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[0].isFinal) {
-    //     text += event.results[i][0].transcript;
-    //   } 
-      // else {
-      //   interim_transcript += event.results[i][0].transcript;
-      // }
-    // }
-    document.querySelector("#final").innerText = text;
-      }
-    // document.querySelector("#interim").innerHTML = interim_transcript;
-  };
 
-  document.querySelector("#start").onclick = () => {
-    setTimeout(() => {
-      speechRecognition.start();
-    }, 50);
-    // this.openFullscreen()
-    document.querySelector("#status").innerHTML =`Voice Recognition is on. Please Speak in Here`
-  };
+  p.innerText = text;
+  if (e.results[0].isFinal) {
+    p = document.createElement("p");
+  }
+});
 
-  // document.querySelector("#stop").onclick = () => {
-  //   speechRecognition.stop();
-  //   document.querySelector("#status").innerHTML =`Press the Start Button`
-  //   // this.closeFullscreen()
-  // };
+document.querySelector("#start").onclick = () => {
+  recognition.start();
+document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up.`
+};
 
-  document.querySelector("#clear").onclick = () => {
-    location.reload()
-  };
+recognition.addEventListener("end", () => {
+  recognition.start();
 
-  window.setInterval(function() {
-  var final = document.querySelector("#final");
-  final.scrollTop = final.scrollHeight;
-  }, 50)
+});
+
+// recognition.start();
+
+document.querySelector("#clear").onclick = () => {
+  location.reload()
+};
+
+document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
+  textarea = document.querySelector('#t-final');
+  if(textarea.style.display === "none"){
+    textarea.style.display = "block";
+    textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px;" placeholder="Please type in here"></textarea>`
+    document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 200px; overflow: auto; display: flex; flex-direction: column-reverse;  background-color: rgb(1, 1, 37);'
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 50px"
+  } else {
+    textarea.style.display = "none"
+    document.querySelector('.button').style.cssText = "position: relative; top: 0px";
+    document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;'
+
+  }
+})  
+
+  document.querySelector('#langs').addEventListener('change', function(e){
+    const option = e.target.value;
+    recognition.lang = option;   
+  })
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+
+  // document.querySelector('#final').addEventListener('input', function(e){
+  //   document.querySelector('#textbox').innerHTML = `<strong class="text-light notranslate">Translation:</strong> <div class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px;">${e.target.value}</div>`
+  // })

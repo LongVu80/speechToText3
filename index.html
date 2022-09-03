@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/21524b5437.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <link rel="stylesheet" href="style.css">
     <title>Speech To Text</title>
   </head>
   <body class="container pt-5 bg-dark">
-    <h2 class="mt-4 text-light text-center">Speech To Text App</h2>
-    <h4 class="mt-4 text-light">Transcript:</h4>
-    <div id="status" class="text-light"></div>
+    <h2 class="mt-4 text-light text-center notranslate">Speech To Text App</h2>
+    <h4 class="mt-4 text-light notranslate">Transcript:</h4>
+    <div id="status" class="text-light notranslate"></div>
       <div id="texting" class="text-light" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;"> 
         <span class="scroll-start-at-top" style="flex: 1 1 0%;"></span><div id="final"></div>
       </div>
       
-      <div id="t-final" class="text-light" style="display: none; margin-top: 3rem;">
+      <div id="t-final" class="text-lighte notranslate" style="display: none; margin-top: 3rem;">
       </div>
-      
+      <!-- <div id="texting"  class="text-light" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;"></div> -->
     <div class="mt-4 button">
-      <button class="btn btn-success" id="start">Start</button>
-      <button class="btn btn-danger" id="clear">Stop & Clear</button> 
-      <i class="fa-solid fa-4x fa-keyboard text-light"></i>
-      <p id="status" class="lead mt-3 text-light" style="display: none">Listenting ...</p>
+      <button class="btn btn-success notranslate" id="start">Start</button>
+      <button class="btn btn-danger notranslate" id="clear">Stop & Clear</button> 
+      <i class="fa-solid fa-4x fa-keyboard text-light notranslate"></i>
+      <div class="langs">
+        <select name="" id="langs" class="bg-primary notranslate">
+          <option value="en-US">English</option>
+          <option value="vi-VN">Vietnamese</option>
+          <option value="es-US">Spanish</option>
+          <option value="fil-PH">Filipino</option>
+        </select>
+      </div>
+      <!-- <strong class="text-light notranslate" id="toTranslate"></strong><button id="translate" class="btn btn-primary notranslate">Translation</button> -->
+      <strong class="text-light translate">Translate to: </strong>
+        <div id="google_translate_element"></div>
     </div>
   </body>
-  <script src="./script2.js"></script>
+  <script src="./script.js"></script>
 </html>

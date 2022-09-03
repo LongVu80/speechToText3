@@ -27,4 +27,14 @@ p.reply {
 
 }
 
+#langs {
+    height: 45px;
+    margin: 8px;
+    border-radius: 8px;
+}
+
+.translate {
+    margin-right: 3px;
+}
+
 
