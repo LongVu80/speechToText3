@@ -9,6 +9,7 @@ window.SpeechRecognition =
 
 const recognition = new SpeechRecognition();
 recognition.interimResults = true;
+recognition.lang = 'en-US'
 
 langs.addEventListener('change', function(e){
   setTimeout(() => {
