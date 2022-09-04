@@ -28,7 +28,7 @@ p.reply {
 }
 
 #langs {
-    height: 45px;
+    height: 40px;
     margin: 8px;
     border-radius: 8px;
 }
@@ -37,4 +37,21 @@ p.reply {
     margin-right: 3px;
 }
 
+#description {
+    display: flex;
+    flex-direction: row;
+}
 
+#toTranslate {
+    display: flex;
+}
+
+#google_translate_element{
+    width: 200px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#translation {
+    margin-top: 25px;
+}

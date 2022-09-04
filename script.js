@@ -1,5 +1,8 @@
 const texts = document.querySelector("#final");
 const textbox = document.querySelector('#textbox');
+const textarea = document.querySelector('#t-final')
+const langs = document.querySelector('#langs');
+const translation = document.querySelector('#translation');
 
 window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -7,7 +10,14 @@ window.SpeechRecognition =
 const recognition = new SpeechRecognition();
 recognition.interimResults = true;
 
-let p = document.createElement("p");
+langs.addEventListener('change', function(e){
+  setTimeout(() => {
+    recognition.start();
+  }, 50);
+   recognition.lang = e.target.value;
+})
+
+let p = document.createElement('p');
 
 recognition.addEventListener("result", (e) => {
   texts.appendChild(p);
@@ -20,26 +30,33 @@ recognition.addEventListener("result", (e) => {
   if (e.results[0].isFinal) {
     p = document.createElement("p");
   }
+  textbox.innerHTML = texts.innerHTML
 });
 
-document.querySelector("#start").onclick = () => {
-  recognition.start();
-document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up.`
-};
+// document.querySelector("#start").onclick = () => {
+//   recognition.start();
+// document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up.`
+// };
 
 recognition.addEventListener("end", () => {
   recognition.start();
 
 });
 
-// recognition.start();
+  // document.querySelector("#stop").onclick = () => {
+  //   if(recognition.start()){
+  //         speechRecognition.stop();
+  //   document.querySelector("#status").innerHTML =`Press the Start Button`
+  //   }
+  // };
+recognition.start();
+
 
 document.querySelector("#clear").onclick = () => {
   location.reload()
 };
 
 document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
-  textarea = document.querySelector('#t-final');
   if(textarea.style.display === "none"){
     textarea.style.display = "block";
     textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px;" placeholder="Please type in here"></textarea>`
@@ -53,15 +70,26 @@ document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
   }
 })  
 
-  document.querySelector('#langs').addEventListener('change', function(e){
-    const option = e.target.value;
-    recognition.lang = option;   
-  })
+textarea.addEventListener('input', function(e){
+  textbox.innerHTML = `${e.target.value}`; 
+})
 
-  // function googleTranslateElementInit() {
-  //   new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  // }
+  function googleTranslateElementInit() {
+    if (recognition.lang != 'en'){
+      new google.translate.TranslateElement({pageLanguage: `${recognition.lang.value}`}, 'google_translate_element');
+    }
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      
+  }
+    
 
-  // document.querySelector('#final').addEventListener('input', function(e){
-  //   document.querySelector('#textbox').innerHTML = `<strong class="text-light notranslate">Translation:</strong> <div class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px;">${e.target.value}</div>`
-  // })
+document.querySelector('#toTranslate').addEventListener('click', function(e){
+
+  if(translation.style.display === "none"){
+    translation.style.display = "block";
+  } 
+})
+
+document.querySelector('#close').addEventListener('click', function(e){
+  this.parentNode.style.display = 'none';
+})
