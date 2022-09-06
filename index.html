@@ -11,21 +11,23 @@
   </head>
   <body class="container pt-5 bg-dark">
     <h2 class="mt-4 text-light text-center notranslate">Speech To Text App</h2>
-    <div id="description">
-      <h4 class="mt-4 text-light notranslate">Transcript:</h4>
-      <div class="langs">
-        <select name="" id="langs" class="bg-primary notranslate">
-          <!-- <option value="en-US">English</option>
-          <option value="vi-VN">Vietnamese</option>
-          <option value="es-US">Spanish</option>
-          <option value="fil-PH">Filipino</option> -->
-        </select>
-      </div>
-      
+    <div id="instruction" class="instruction text-light"><strong>Instruction:</strong> 
+      <ol>
+        <li>Select Your <span class="text-primary"> Language </span> then Press <span class="text-success notranslate"> Start Button </span></li>
+        <li><strong>ADVISE: </strong> 
+          <ul>
+            <li><strong class="text-warning">Android -> Google-Chrome: </strong>You can switch to any other preferred languages after press <span class="text-success notranslate"> Start Button </span>.</li>
+            <li><strong class="text-warning">IOS -> Safari: </strong>Important!!! Always press <span class="text-danger notranslate"> Stop Button </span> before switch to a new <span class="text-primary"> Language </span> (required to Press <span class="text-success notranslate"> Start Button </span>again.</li>
+          </ul>
+        </li>
+        <li>Google Translation section did not appeared? <span class="notranslate"> Refresh </span> or click the <span class="text-danger notranslate"> Stop Button </span></li>
+      </ol>
     </div>
-    <div id="countdown" class="text-light"></div>
-    <div id="status" class="text-light notranslate"></div>
-      <div id="texting" class="text-light notranslate" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;"> 
+    
+    <div id="status" class="text-light notranslate"></div>  
+
+    <h4 class="mt-4 text-light notranslate">Transcript: </h4><div id="countdown" class="text-light"></div>
+      <div id="texting" class="text-light notranslate" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse; margin-top: 15px;"> 
         <span class="scroll-start-at-top" style="flex: 1 1 0%;"></span><div id="final"></div>
       </div>
       
@@ -33,8 +35,18 @@
       </div>
 
     <div class="mt-4 button">
-      <!-- <button class="btn btn-success notranslate" id="start">Start</button>
-      <button class="btn btn-danger notranslate" id="stop">Stop</button> -->
+      <div class="langs">
+        <select name=""  id="langs" class="bg-primary notranslate">
+          <!-- <option value="" disabled selected class="disable">Select Language</option> -->
+          <!-- <option value="en-US">English</option>
+          <option value="vi-VN">Vietnamese</option>
+          <option value="es-US">Spanish</option>
+          <option value="fil-PH">Filipino</option> -->
+        </select>
+    </div>
+    
+      <button class="btn btn-success notranslate" id="start">Start</button>
+      <!-- <button class="btn btn-danger notranslate" id="stop">Stop</button> -->
       <button class="btn btn-danger notranslate" id="clear">Stop & Clear</button> 
       <i class="fa-solid fa-4x fa-keyboard text-light notranslate"></i>
       

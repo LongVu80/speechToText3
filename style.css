@@ -7,6 +7,12 @@
     margin: 8px;
 }
 
+#instruction {
+    border: lightgray solid 1px;
+    padding: 0px 25px;
+}
+
+
 p {
     padding: 5px;
     color: aliceblue;

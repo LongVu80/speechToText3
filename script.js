@@ -3,6 +3,7 @@ const textbox = document.querySelector('#textbox');
 const textarea = document.querySelector('#t-final')
 const langs = document.querySelector('#langs');
 const translation = document.querySelector('#translation');
+const instruction = document.getElementsByClassName('instruction')
 
 window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,61 +14,59 @@ recognition.lang = 'en-US'
 
 var myMap = new Map([
   ["English", "en-US"],
-  ["Vietnamese", "vi-VN"]
+  ["Vietnamese", "vi-VN"],
+  ["Japanese", "ja-JP"],
+  ["Korean (S-K)", "ko-KR"],
+  ["Burmese", "my-MM"],
+  ["Cantonese (HK)", "yue-Hant-HK"],
+  ["Mandarin (CN)", "zh"],
+  ["Mandarin (TW)", "zh-TW"],
+  ["Czech", "cs-CZ"],
+  ["Danish", "da-DK"],
+  ["Dutch", "nl-BE"],
+  ["Filipino", "fil-PH"],
+  ["Finnish", "fi-FI"],
+  ["French", "fr-FR"],
+  ["Galician (Spain)", "gl-ES"],
+  ["Georgian", "ka-GE"],
+  ["German", "de-DE"],
+  ["Greek", "el-GR"],
+  ["Gujarati (India)", "gu-IN"],
+  ["Hindi (India", "hi-IN"],
+  ["Hebrew (Israel)", "iw-IL"],
+  ["Hungarian", "hu-HU"],
+  ["Icelandic", "is-IS"],
+  ["Indonesian", "id-ID"],
+  ["Italian", "it-IT"],
+  ["Kazakh (Kazakhstan)", "kk-KZ"],
+  ["Khmer(Cambodia)", "km-KH"],
+  ["Lao", "lo-LA"],
+  ["Latvian", "lv-LV"],
+  ["Mongolian", "mn-MN"],
+  ["Nepali", "ne-NP"],
+  ["Norwegian", "no-NO"],
+  ["Persian(Iran)", "fa-IR"],
+  ["Polish", "pl-PL"],
+  ["Portuguese (Brazil)", "pt-BR"],
+  ["Portuguese (Portugal)", "pt-PT"],
+  ["Romanian", "ro_RO"],
+  ["Russian", "ru-RU"],
+  ["Serbian", "sr-RS"],
+  ["Sinhala (Sri-Lanka)", "si-LK"],
+  ["Spanish", "es-US"],
+  ["Swedish", "sv-SE"],
+  ["Tamil (India)", "ta-IN"],
+  ["Thai", "th-TH"],
+  ["Turkish", "tr-TR"],
+  ["Ukrainian", "uk-UA"],
+  ["Urdu(India)", "ur-IN"],
+  ["Uzbek (Uzbekistan)", "uz-UZ"],
+  ["Zulu", "zu-ZA"],
 ]),
   select = document.getElementById('langs');
-  // select.id('langs')
-// myMap.set("English", "en-US");
-// myMap.set("Vietnamese", "vi-VN");
-// myMap.set("Japanese", "ja-JP");
-// myMap.set("Korean (S-K)", "ko-KR");
-// myMap.set("Burmese", "my-MM");
-// myMap.set("Cantonese (HK)", "yue-Hant-HK");
-// myMap.set("Mandarin (CN)", "zh");
-// myMap.set("Mandarin (TW)", "zh-TW");
-// myMap.set("Czech", "cs-CZ");
-// myMap.set("Danish", "da-DK");
-// myMap.set("Dutch", "nl-BE");
-// myMap.set("Filipino", "fil-PH");
-// myMap.set("Finnish", "fi-FI");
-// myMap.set("French", "fr-FR");
-// myMap.set("Galician (Spain)", "gl-ES");
-// myMap.set("Georgian", "ka-GE");
-// myMap.set("German", "de-DE");
-// myMap.set("Greek", "el-GR");
-// myMap.set("Gujarati (India)", "gu-IN");
-// myMap.set("Hindi (India", "hi-IN");
-// myMap.set("Hebrew (Israel)", "iw-IL");
-// myMap.set("Hungarian", "hu-HU");
-// myMap.set("Icelandic", "is-IS");
-// myMap.set("Indonesian", "id-ID");
-// myMap.set("Italian", "it-IT");
-// myMap.set("Kazakh (Kazakhstan)", "kk-KZ");
-// myMap.set("Khmer(Cambodia)", "km-KH");
-// myMap.set("Lao", "lo-LA");
-// myMap.set("Latvian", "lv-LV");
-// myMap.set("Mongolian", "mn-MN");
-// myMap.set("Nepali", "ne-NP");
-// myMap.set("Norwegian", "no-NO");
-// myMap.set("Persian(Iran)", "fa-IR");
-// myMap.set("Polish", "pl-PL");
-// myMap.set("Portuguese (Brazil)", "pt-BR");
-// myMap.set("Portuguese (Portugal)", "pt-PT");
-// myMap.set("Romanian", "ro_RO");
-// myMap.set("Russian", "ru-RU");
-// myMap.set("Serbian", "sr-RS");
-// myMap.set("Sinhala (Sri-Lanka)", "si-LK");
-// myMap.set("Spanish", "es-US");
-// myMap.set("Swedish", "sv-SE");
-// myMap.set("Tamil (India)", "ta-IN");
-// myMap.set("Thai", "th-TH");
-// myMap.set("Turkish", "tr-TR");
-// myMap.set("Ukrainian", "uk-UA");
-// myMap.set("Urdu(India)", "ur-IN");
-// myMap.set("Uzbek (Uzbekistan)", "uz-UZ");
-// myMap.set("Zulu", "zu-ZA");
 
-let str = '';
+
+let str = `<option value="" disabled selected class="disable">-- Select Language --</option>`;
 myMap.forEach((key, val) => {
   str += `<option value='${key}'>${val}</option>`
 
@@ -75,21 +74,26 @@ myMap.forEach((key, val) => {
 select.innerHTML = str;
 
 langs.addEventListener('change', function(e){
-  // setTimeout(() => {
-  //   recognition.start();
-  // }, 50);
-   recognition.lang = e.target.value;
-   var timeleft = 5;
+      recognition.lang = e.target.value;
+      
+// })
+
+
+   var timeleft = 4;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Please speak up in here.";
-  } else {
-    document.getElementById("countdown").innerHTML = "Waiting to switch language in: " + timeleft + " . Please be patience. Thank you";
-  }
+    document.getElementById("countdown").innerHTML = ``;
+    
+  } else{
+    document.getElementById("countdown").innerHTML = `Waiting to switch language in: ${timeleft}. Please, be patience. Thank you.`
+   }
   timeleft -= 1;
 }, 1000);
+
 })
+
+
 
 
 
@@ -109,10 +113,12 @@ recognition.addEventListener("result", (e) => {
   textbox.innerHTML = texts.innerHTML;
 });
 
-// document.querySelector("#start").onclick = () => {
-//   recognition.start();
-// document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up.`
-// };
+document.querySelector("#start").addEventListener('click', function() {
+  recognition.start();
+document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up to my phone.`
+ if(instruction)
+document.getElementsByID('instruction').parentNode.style.display = 'none';
+})
 
 recognition.addEventListener("end", () => {
   recognition.start();
@@ -125,7 +131,7 @@ recognition.addEventListener("end", () => {
   //   document.querySelector("#status").innerHTML =`Press the Start Button`
   //   }
   // };
-recognition.start();
+// recognition.start();
 
 
 document.querySelector("#clear").onclick = () => {
@@ -155,11 +161,17 @@ textarea.addEventListener('input', function(e){
       new google.translate.TranslateElement({pageLanguage: `${recognition.lang.value}`}, 'google_translate_element');
     }
     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-      
   }
     
 
 document.querySelector('#toTranslate').addEventListener('click', function(e){
+
+  if(translation.style.display === "none"){
+    translation.style.display = "block";
+  } 
+})
+
+document.querySelector('#google_translate_element').addEventListener('click', function(e){
 
   if(translation.style.display === "none"){
     translation.style.display = "block";
