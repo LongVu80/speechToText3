@@ -86,7 +86,7 @@ var downloadTimer = setInterval(function(){
     document.getElementById("countdown").innerHTML = ``;
     
   } else{
-    document.getElementById("countdown").innerHTML = `Waiting to switch language in: ${timeleft}. Please, be patience. Thank you.`
+    document.getElementById("countdown").innerHTML = `Waiting to switch language in: ${timeleft}.`
    }
   timeleft -= 1;
 }, 1000);
