@@ -55,3 +55,7 @@ p.reply {
 #translation {
     margin-top: 25px;
 }
+
+#textbox {
+    overflow: auto;
+}

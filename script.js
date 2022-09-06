@@ -11,58 +11,61 @@ const recognition = new SpeechRecognition();
 recognition.interimResults = true;
 recognition.lang = 'en-US'
 
-var myMap = new Map(),
+var myMap = new Map([
+  ["English", "en-US"],
+  ["Vietnamese", "vi-VN"]
+]),
   select = document.getElementById('langs');
   // select.id('langs')
-myMap.set("English", "en-US");
-myMap.set("Vietnamese", "vi-VN");
-myMap.set("Japanese", "ja-JP");
-myMap.set("Korean (S-K)", "ko-KR");
-myMap.set("Burmese", "my-MM");
-myMap.set("Cantonese (HK)", "yue-Hant-HK");
-myMap.set("Mandarin (CN)", "zh");
-myMap.set("Mandarin (TW)", "zh-TW");
-myMap.set("Czech", "cs-CZ");
-myMap.set("Danish", "da-DK");
-myMap.set("Dutch", "nl-BE");
-myMap.set("Filipino", "fil-PH");
-myMap.set("Finnish", "fi-FI");
-myMap.set("French", "fr-FR");
-myMap.set("Galician (Spain)", "gl-ES");
-myMap.set("Georgian", "ka-GE");
-myMap.set("German", "de-DE");
-myMap.set("Greek", "el-GR");
-myMap.set("Gujarati (India)", "gu-IN");
-myMap.set("Hindi (India", "hi-IN");
-myMap.set("Hebrew (Israel)", "iw-IL");
-myMap.set("Hungarian", "hu-HU");
-myMap.set("Icelandic", "is-IS");
-myMap.set("Indonesian", "id-ID");
-myMap.set("Italian", "it-IT");
-myMap.set("Kazakh (Kazakhstan)", "kk-KZ");
-myMap.set("Khmer(Cambodia)", "km-KH");
-myMap.set("Lao", "lo-LA");
-myMap.set("Latvian", "lv-LV");
-myMap.set("Mongolian", "mn-MN");
-myMap.set("Nepali", "ne-NP");
-myMap.set("Norwegian", "no-NO");
-myMap.set("Persian(Iran)", "fa-IR");
-myMap.set("Polish", "pl-PL");
-myMap.set("Portuguese (Brazil)", "pt-BR");
-myMap.set("Portuguese (Portugal)", "pt-PT");
-myMap.set("Romanian", "ro_RO");
-myMap.set("Russian", "ru-RU");
-myMap.set("Serbian", "sr-RS");
-myMap.set("Sinhala (Sri-Lanka)", "si-LK");
-myMap.set("Spanish", "es-US");
-myMap.set("Swedish", "sv-SE");
-myMap.set("Tamil (India)", "ta-IN");
-myMap.set("Thai", "th-TH");
-myMap.set("Turkish", "tr-TR");
-myMap.set("Ukrainian", "uk-UA");
-myMap.set("Urdu(India)", "ur-IN");
-myMap.set("Uzbek (Uzbekistan)", "uz-UZ");
-myMap.set("Zulu", "zu-ZA");
+// myMap.set("English", "en-US");
+// myMap.set("Vietnamese", "vi-VN");
+// myMap.set("Japanese", "ja-JP");
+// myMap.set("Korean (S-K)", "ko-KR");
+// myMap.set("Burmese", "my-MM");
+// myMap.set("Cantonese (HK)", "yue-Hant-HK");
+// myMap.set("Mandarin (CN)", "zh");
+// myMap.set("Mandarin (TW)", "zh-TW");
+// myMap.set("Czech", "cs-CZ");
+// myMap.set("Danish", "da-DK");
+// myMap.set("Dutch", "nl-BE");
+// myMap.set("Filipino", "fil-PH");
+// myMap.set("Finnish", "fi-FI");
+// myMap.set("French", "fr-FR");
+// myMap.set("Galician (Spain)", "gl-ES");
+// myMap.set("Georgian", "ka-GE");
+// myMap.set("German", "de-DE");
+// myMap.set("Greek", "el-GR");
+// myMap.set("Gujarati (India)", "gu-IN");
+// myMap.set("Hindi (India", "hi-IN");
+// myMap.set("Hebrew (Israel)", "iw-IL");
+// myMap.set("Hungarian", "hu-HU");
+// myMap.set("Icelandic", "is-IS");
+// myMap.set("Indonesian", "id-ID");
+// myMap.set("Italian", "it-IT");
+// myMap.set("Kazakh (Kazakhstan)", "kk-KZ");
+// myMap.set("Khmer(Cambodia)", "km-KH");
+// myMap.set("Lao", "lo-LA");
+// myMap.set("Latvian", "lv-LV");
+// myMap.set("Mongolian", "mn-MN");
+// myMap.set("Nepali", "ne-NP");
+// myMap.set("Norwegian", "no-NO");
+// myMap.set("Persian(Iran)", "fa-IR");
+// myMap.set("Polish", "pl-PL");
+// myMap.set("Portuguese (Brazil)", "pt-BR");
+// myMap.set("Portuguese (Portugal)", "pt-PT");
+// myMap.set("Romanian", "ro_RO");
+// myMap.set("Russian", "ru-RU");
+// myMap.set("Serbian", "sr-RS");
+// myMap.set("Sinhala (Sri-Lanka)", "si-LK");
+// myMap.set("Spanish", "es-US");
+// myMap.set("Swedish", "sv-SE");
+// myMap.set("Tamil (India)", "ta-IN");
+// myMap.set("Thai", "th-TH");
+// myMap.set("Turkish", "tr-TR");
+// myMap.set("Ukrainian", "uk-UA");
+// myMap.set("Urdu(India)", "ur-IN");
+// myMap.set("Uzbek (Uzbekistan)", "uz-UZ");
+// myMap.set("Zulu", "zu-ZA");
 
 let str = '';
 myMap.forEach((key, val) => {
@@ -76,7 +79,7 @@ langs.addEventListener('change', function(e){
   //   recognition.start();
   // }, 50);
    recognition.lang = e.target.value;
-   var timeleft = 10;
+   var timeleft = 5;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
@@ -103,7 +106,7 @@ recognition.addEventListener("result", (e) => {
   if (e.results[0].isFinal) {
     p = document.createElement("p");
   }
-  textbox.innerHTML = texts.innerHTML
+  textbox.innerHTML = texts.innerHTML;
 });
 
 // document.querySelector("#start").onclick = () => {
