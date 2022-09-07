@@ -12,6 +12,10 @@
     padding: 0px 25px;
 }
 
+#transcript {
+    display: flex;
+    align-items: center;
+}
 
 p {
     padding: 5px;

@@ -11,8 +11,9 @@
   </head>
   <body class="container pt-5 bg-dark">
     <h2 class="mt-4 text-light text-center notranslate">Speech To Text App</h2>
-    <div id="instruction" class="instruction text-light"><strong>Instruction:</strong> 
-      <ol>
+    <div class="text-light"><strong>Instruction:</strong> <button class="instruction btn btn-primary">Click Me</button>
+      <div  id="instruction" style="display: none;">
+        <ol>
         <li>Select Your <span class="text-primary"> Language </span> then Press <span class="text-success notranslate"> Start Button </span></li>
         <li><strong>ADVISE: </strong> 
           <ul>
@@ -22,19 +23,13 @@
         </li>
         <li>Google Translation section did not appeared? <span class="notranslate"> Refresh </span> or click the <span class="text-danger notranslate"> Stop Button </span></li>
       </ol>
+      </div>
+      
     </div>
     
     <div id="status" class="text-light notranslate"></div>  
 
-    <h4 class="mt-4 text-light notranslate">Transcript: </h4><div id="countdown" class="text-light"></div>
-      <div id="texting" class="text-light notranslate" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse; margin-top: 15px;"> 
-        <span class="scroll-start-at-top" style="flex: 1 1 0%;"></span><div id="final"></div>
-      </div>
-      
-      <div id="t-final" class="text-lighte notranslate" style="display: none; margin-top: 3rem;">
-      </div>
-
-    <div class="mt-4 button">
+    <div id="transcript">
       <div class="langs">
         <select name=""  id="langs" class="bg-primary notranslate">
           <!-- <option value="" disabled selected class="disable">Select Language</option> -->
@@ -43,8 +38,23 @@
           <option value="es-US">Spanish</option>
           <option value="fil-PH">Filipino</option> -->
         </select>
+      </div>
+      <h4 class="mt-4 text-light notranslate">Transcript: </h4>
     </div>
-    
+   
+  <div id="countdown" class="text-light"></div>
+      <div id="texting" class="text-light notranslate" style="border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse; margin-top: 15px;"> 
+        <span class="scroll-start-at-top" style="flex: 1 1 0%;"></span><div id="final"></div>
+      </div>
+      
+      <div id="t-final" class="text-lighte notranslate" style="display: none; margin-top: 3rem;">
+      </div>
+      <div id="translation" style="display: none">
+        <div id="textbox" class="text-light" style="border: 1px solid gray; height: 300px;"></div>
+        <button class="btn btn-warning notranslate" id="close">Close</button>
+    </div>
+
+    <div class="mt-4 button">
       <button class="btn btn-success notranslate" id="start">Start</button>
       <!-- <button class="btn btn-danger notranslate" id="stop">Stop</button> -->
       <button class="btn btn-danger notranslate" id="clear">Stop & Clear</button> 
@@ -55,10 +65,7 @@
       <strong class="text-light translate notranslate">Translate to: </strong>
         <div id="google_translate_element" class="bg-warning"></div>
     </div>
-    <div id="translation" style="display: none">
-      <div id="textbox" class="text-light" style="border: 1px solid gray; height: 300px;"></div>
-      <button class="btn btn-warning notranslate" id="close">Close</button>
-    </div>
+
     
   </body>
   <script src="./script.js"></script>

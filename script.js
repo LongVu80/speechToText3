@@ -93,7 +93,17 @@ var downloadTimer = setInterval(function(){
 
 })
 
-
+document.querySelector('.instruction').addEventListener('click', function(e) {
+  const construction = document.querySelector('#instruction');
+  if(construction.style.display === "none") {
+    construction.style.display = "block";
+    document.querySelector('.instruction').innerHTML = "Close"
+  } else {
+    construction.style.display = "none";
+    document.querySelector('.instruction').innerHTML = "Click Me"
+  }
+  
+})
 
 
 
@@ -141,12 +151,12 @@ document.querySelector("#clear").onclick = () => {
 document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
   if(textarea.style.display === "none"){
     textarea.style.display = "block";
-    textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px;" placeholder="Please type in here"></textarea>`
+    textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px; margin-bottom: -10px;" placeholder="Please type in here"></textarea>`
     document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 200px; overflow: auto; display: flex; flex-direction: column-reverse;  background-color: rgb(1, 1, 37);'
-    document.querySelector('.button').style.cssText = "position: relative; bottom: 50px"
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 0px"
   } else {
     textarea.style.display = "none"
-    document.querySelector('.button').style.cssText = "position: relative; top: 0px";
+    document.querySelector('.button').style.cssText = "position: relative; top: 25px";
     document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;'
 
   }
