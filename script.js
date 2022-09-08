@@ -86,7 +86,7 @@ var downloadTimer = setInterval(function(){
     document.getElementById("countdown").innerHTML = ``;
     
   } else{
-    document.getElementById("countdown").innerHTML = `Waiting to switch language in: ${timeleft}.`
+    document.getElementById("countdown").innerHTML = `Waiting to switch language in: <span class="text-warning"><strong>${timeleft}</strong></span>.`
    }
   timeleft -= 1;
 }, 1000);
@@ -153,10 +153,10 @@ document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
     textarea.style.display = "block";
     textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px; margin-bottom: -10px;" placeholder="Please type in here"></textarea>`
     document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 200px; overflow: auto; display: flex; flex-direction: column-reverse;  background-color: rgb(1, 1, 37);'
-    document.querySelector('.button').style.cssText = "position: relative; bottom: 0px"
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 35px"
   } else {
     textarea.style.display = "none"
-    document.querySelector('.button').style.cssText = "position: relative; top: 25px";
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 15px";
     document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;'
 
   }
