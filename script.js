@@ -74,9 +74,8 @@ myMap.forEach((key, val) => {
 select.innerHTML = str;
 
 langs.addEventListener('change', function(e){
-      recognition.lang = e.target.value;
-      
-// })
+    recognition.lang = e.target.value;
+      console.log(recognition.lang)
 
 
    var timeleft = 4;
@@ -126,8 +125,8 @@ recognition.addEventListener("result", (e) => {
 document.querySelector("#start").addEventListener('click', function() {
   recognition.start();
 document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up to my phone.`
- if(instruction)
-document.getElementsByID('instruction').parentNode.style.display = 'none';
+//  if(instruction)
+// document.getElementsByID('instruction').parentNode.style.display = 'none';
 })
 
 recognition.addEventListener("end", () => {
