@@ -3,14 +3,15 @@ const textbox = document.querySelector('#textbox');
 const textarea = document.querySelector('#t-final')
 const langs = document.querySelector('#langs');
 const translation = document.querySelector('#translation');
-const instruction = document.getElementsByClassName('instruction')
+const instruction = document.getElementsByClassName('instruction');
+const start = document.querySelector("#start");
 
 window.SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new SpeechRecognition();
 recognition.interimResults = true;
-recognition.lang = 'en-US'
+recognition.lang = 'en-US';
 
 var myMap = new Map([
   ["English", "en-US"],
@@ -66,7 +67,7 @@ var myMap = new Map([
   select = document.getElementById('langs');
 
 
-let str = `<option value="" disabled selected class="disable">-- Select Language --</option>`;
+var str = `<option value="" disabled selected class="disable">-- Select Language --</option>`;
 myMap.forEach((key, val) => {
   str += `<option value='${key}'>${val}</option>`
 
@@ -74,10 +75,12 @@ myMap.forEach((key, val) => {
 select.innerHTML = str;
 
 langs.addEventListener('change', function(e){
-    recognition.lang = e.target.value;
-      console.log(recognition.lang)
+      recognition.lang = e.target.value;
+    console.log(recognition.lang)
 
-
+    
+    
+  
    var timeleft = 4;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
@@ -122,13 +125,24 @@ recognition.addEventListener("result", (e) => {
   textbox.innerHTML = texts.innerHTML;
 });
 
-document.querySelector("#start").addEventListener('click', function() {
-  recognition.start();
-document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up to my phone.`
-//  if(instruction)
-// document.getElementsByID('instruction').parentNode.style.display = 'none';
-})
-
+start.onclick = function() {started()};
+const started = function() {
+  if (window.safari) {
+    langs.style.cssText += "display: none;"
+  }
+  start.innerHTML = 'Stop & Clear';
+    start.classList.remove("btn-success")
+    start.classList.add("btn-danger")
+  recognition.start()
+  start.onclick = function() {stop()};
+  document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up to my phone.`
+}
+const stop = function(){
+  start.innerHTML = 'START';
+ 
+  location.reload();
+  start.onclick = function(){started()};
+}
 recognition.addEventListener("end", () => {
   recognition.start();
 
@@ -143,9 +157,9 @@ recognition.addEventListener("end", () => {
 // recognition.start();
 
 
-document.querySelector("#clear").onclick = () => {
-  location.reload()
-};
+// document.querySelector("#clear").onclick = () => {
+//   location.reload()
+// };
 
 document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
   if(textarea.style.display === "none"){
@@ -190,3 +204,4 @@ document.querySelector('#google_translate_element').addEventListener('click', fu
 document.querySelector('#close').addEventListener('click', function(e){
   this.parentNode.style.display = 'none';
 })
+
