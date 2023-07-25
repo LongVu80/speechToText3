@@ -204,4 +204,3 @@ document.querySelector('#google_translate_element').addEventListener('click', fu
 document.querySelector('#close').addEventListener('click', function(e){
   this.parentNode.style.display = 'none';
 })
-

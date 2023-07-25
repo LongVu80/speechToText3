@@ -60,14 +60,280 @@
       <button class="btn btn-success notranslate" id="start">Start</button>
       <!-- <button class="btn btn-danger notranslate" id="clear">Stop & Clear</button>  -->
       <i class="fa-solid fa-4x fa-keyboard text-light notranslate"></i>
-      
+      <button id="save-btn" class="btn btn-danger notranslate">Save Texts</button>
     </div> 
     <div id="toTranslate">
       <strong class="text-light translate notranslate">Translate to: </strong>
         <div id="google_translate_element" class="bg-warning"></div>
     </div>
+    <div id="saved-texts"></div>
+
+    <script>
+      const texts = document.querySelector("#final");
+const textbox = document.querySelector('#textbox');
+const textarea = document.querySelector('#t-final')
+const langs = document.querySelector('#langs');
+const translation = document.querySelector('#translation');
+const instruction = document.getElementsByClassName('instruction');
+const start = document.querySelector("#start");
+const savedTextsContainer = document.querySelector("#saved-texts");
+const saveBtn = document.querySelector("#save-btn");
+let savedTexts = [];
+
+window.SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+const recognition = new SpeechRecognition();
+recognition.interimResults = true;
+recognition.lang = 'en-US';
+
+var myMap = new Map([
+  ["English", "en-US"],
+  ["Vietnamese", "vi-VN"],
+  ["Japanese", "ja-JP"],
+  ["Korean (S-K)", "ko-KR"],
+  ["Burmese", "my-MM"],
+  ["Cantonese (HK)", "yue-Hant-HK"],
+  ["Mandarin (CN)", "zh"],
+  ["Mandarin (TW)", "zh-TW"],
+  ["Czech", "cs-CZ"],
+  ["Danish", "da-DK"],
+  ["Dutch", "nl-BE"],
+  ["Filipino", "fil-PH"],
+  ["Finnish", "fi-FI"],
+  ["French", "fr-FR"],
+  ["Galician (Spain)", "gl-ES"],
+  ["Georgian", "ka-GE"],
+  ["German", "de-DE"],
+  ["Greek", "el-GR"],
+  ["Gujarati (India)", "gu-IN"],
+  ["Hindi (India", "hi-IN"],
+  ["Hebrew (Israel)", "iw-IL"],
+  ["Hungarian", "hu-HU"],
+  ["Icelandic", "is-IS"],
+  ["Indonesian", "id-ID"],
+  ["Italian", "it-IT"],
+  ["Kazakh (Kazakhstan)", "kk-KZ"],
+  ["Khmer(Cambodia)", "km-KH"],
+  ["Lao", "lo-LA"],
+  ["Latvian", "lv-LV"],
+  ["Mongolian", "mn-MN"],
+  ["Nepali", "ne-NP"],
+  ["Norwegian", "no-NO"],
+  ["Persian(Iran)", "fa-IR"],
+  ["Polish", "pl-PL"],
+  ["Portuguese (Brazil)", "pt-BR"],
+  ["Portuguese (Portugal)", "pt-PT"],
+  ["Romanian", "ro_RO"],
+  ["Russian", "ru-RU"],
+  ["Serbian", "sr-RS"],
+  ["Sinhala (Sri-Lanka)", "si-LK"],
+  ["Spanish", "es-US"],
+  ["Swedish", "sv-SE"],
+  ["Tamil (India)", "ta-IN"],
+  ["Thai", "th-TH"],
+  ["Turkish", "tr-TR"],
+  ["Ukrainian", "uk-UA"],
+  ["Urdu(India)", "ur-IN"],
+  ["Uzbek (Uzbekistan)", "uz-UZ"],
+  ["Zulu", "zu-ZA"],
+]),
+  select = document.getElementById('langs');
+
+
+var str = `<option value="" disabled selected class="disable">-- Select Language --</option>`;
+myMap.forEach((key, val) => {
+  str += `<option value='${key}'>${val}</option>`
+
+});
+select.innerHTML = str;
+
+langs.addEventListener('change', function(e){
+      recognition.lang = e.target.value;
+    console.log(recognition.lang)
 
     
+    
+  
+   var timeleft = 4;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = ``;
+    
+  } else{
+    document.getElementById("countdown").innerHTML = `Waiting to switch language in: <span class="text-warning"><strong>${timeleft}</strong></span>.`
+   }
+  timeleft -= 1;
+}, 1000);
+
+})
+
+document.querySelector('.instruction').addEventListener('click', function(e) {
+  const construction = document.querySelector('#instruction');
+  if(construction.style.display === "none") {
+    construction.style.display = "block";
+    document.querySelector('.instruction').innerHTML = "Close"
+  } else {
+    construction.style.display = "none";
+    document.querySelector('.instruction').innerHTML = "Click Me"
+  }
+  
+})
+
+
+
+let p = document.createElement('p');
+
+recognition.addEventListener("result", (e) => {
+  texts.appendChild(p);
+  const text = Array.from(e.results)
+    .map((result) => result[0])
+    .map((result) => result.transcript)
+    .join("")
+
+  p.innerText = text;
+  if (e.results[0].isFinal) {
+    p = document.createElement("p");
+  }
+  textbox.innerHTML = texts.innerHTML;
+});
+
+start.onclick = function() {started()};
+const started = function() {
+  if (window.safari) {
+    langs.style.cssText += "display: none;"
+  }
+  start.innerHTML = 'Stop & Clear';
+    start.classList.remove("btn-success")
+    start.classList.add("btn-danger")
+  recognition.start()
+  start.onclick = function() {stop()};
+  document.querySelector("#status").innerHTML =`Voice Recognition is on. Please speak up to my phone.`
+}
+const stop = function(){
+  start.innerHTML = 'START';
+ 
+  location.reload();
+  start.onclick = function(){started()};
+}
+recognition.addEventListener("end", () => {
+  recognition.start();
+
+});
+
+  // document.querySelector("#stop").onclick = () => {
+  //   if(recognition.start()){
+  //         speechRecognition.stop();
+  //   document.querySelector("#status").innerHTML =`Press the Start Button`
+  //   }
+  // };
+// recognition.start();
+
+
+// document.querySelector("#clear").onclick = () => {
+//   location.reload()
+// };
+
+// Save button event listener
+saveBtn.addEventListener("click", () => {
+  const allParagraphs = document.querySelectorAll("#final p");
+  const savedTextsArray = Array.from(allParagraphs).map((paragraph) => paragraph.innerText);
+  savedTexts = savedTexts.concat(savedTextsArray);
+
+  // Save the texts to localStorage
+  localStorage.setItem("savedTexts", JSON.stringify(savedTexts));
+
+  // Clear the displayed texts to avoid duplicates when displaying saved texts
+  texts.innerHTML = "";
+
+  // Display the saved texts with delete buttons
+  displaySavedTexts();
+});
+
+function displaySavedTexts() {
+  savedTextsContainer.innerHTML = "";
+
+  savedTexts.forEach((text) => {
+    const savedTextElement = document.createElement("div");
+    savedTextElement.classList.add("saved-text");
+
+    const textParagraph = document.createElement("p");
+    textParagraph.innerText = text;
+    savedTextElement.appendChild(textParagraph);
+
+    savedTextsContainer.appendChild(savedTextElement);
+  });
+
+  // Create the delete all button
+  const deleteAllBtn = document.createElement("button");
+  deleteAllBtn.innerText = "Delete All";
+  deleteAllBtn.addEventListener("click", () => {
+    // Clear the savedTexts array
+    savedTexts = [];
+    // Update localStorage with the empty array
+    localStorage.setItem("savedTexts", JSON.stringify(savedTexts));
+    // Clear the displayed texts
+    savedTextsContainer.innerHTML = "";
+  });
+
+  // Append the delete all button to the container
+  savedTextsContainer.appendChild(deleteAllBtn);
+}
+
+// Load saved texts from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTextsData = localStorage.getItem("savedTexts");
+  if (savedTextsData) {
+    savedTexts = JSON.parse(savedTextsData);
+    displaySavedTexts();
+  }
+});
+
+document.querySelector('.fa-keyboard').addEventListener('click', function(e) {
+  if(textarea.style.display === "none"){
+    textarea.style.display = "block";
+    textarea.innerHTML = `<textarea id="textarea" cols="30" rows="10" class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px; font-size: 25px; position: relative; bottom: 50px; margin-bottom: -10px;" placeholder="Please type in here"></textarea>`
+    document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 200px; overflow: auto; display: flex; flex-direction: column-reverse;  background-color: rgb(1, 1, 37);'
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 35px"
+  } else {
+    textarea.style.display = "none"
+    document.querySelector('.button').style.cssText = "position: relative; bottom: 15px";
+    document.querySelector('#texting').style.cssText = 'border: 1px solid gray; height: 300px; overflow: auto; display: flex; flex-direction: column-reverse;'
+
+  }
+})  
+
+textarea.addEventListener('input', function(e){
+  textbox.innerHTML = `${e.target.value}`; 
+})
+
+  function googleTranslateElementInit() {
+    if (recognition.lang != 'en'){
+      new google.translate.TranslateElement({pageLanguage: `${recognition.lang.value}`}, 'google_translate_element');
+    }
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+    
+
+document.querySelector('#toTranslate').addEventListener('click', function(e){
+
+  if(translation.style.display === "none"){
+    translation.style.display = "block";
+  } 
+})
+
+document.querySelector('#google_translate_element').addEventListener('click', function(e){
+
+  if(translation.style.display === "none"){
+    translation.style.display = "block";
+  } 
+})
+
+document.querySelector('#close').addEventListener('click', function(e){
+  this.parentNode.style.display = 'none';
+})
+    </script>
   </body>
-  <script src="./script.js"></script>
+  <!-- <script src="./script.js"></script> -->
 </html>
